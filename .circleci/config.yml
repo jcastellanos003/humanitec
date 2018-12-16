@@ -1,0 +1,99 @@
+defaults: &defaults
+    working_directory: ~/cosmeticapp
+    docker:
+        - image: circleci/node:6-browsers
+
+version: 2
+
+jobs:
+    fetch_dependencies:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                  key: dependencies--{{ .Branch }}-{{ checksum "package.json" }}
+            - run:
+                  name: Fetch npm dependencies.
+                  command: source 'scripts/index.sh' && install_dependencies
+            - save_cache:
+                  key: dependencies--{{ .Branch }}-{{ checksum "package.json" }}
+                  paths:
+                      - 'node_modules'
+    unit_test:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                  key: dependencies--{{ .Branch }}-{{ checksum "package.json" }}
+            - run:
+                  name: Run unit tests.
+                  command: source 'scripts/index.sh' && run_unit_tests
+    build:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                  key: dependencies--{{ .Branch }}-{{ checksum "package.json" }}
+            - run:
+                  name: Build release a package.
+                  command: source 'scripts/index.sh' && build_release
+    release_to_github:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                  key: dependencies--{{ .Branch }}-{{ checksum "package.json" }}
+            - run:
+                  name: Configure git user.
+                  command: source 'scripts/index.sh' && configure_git_user
+            - run:
+                  name: Generate changelog.
+                  command: source 'scripts/index.sh' && generate_changelog
+            - run:
+                  name: Push release update.
+                  command: source 'scripts/index.sh' && push_release_update
+            - run:
+                  name: Push github release.
+                  command: source 'scripts/index.sh' && create_github_release
+    bump:
+        <<: *defaults
+        steps:
+            - checkout
+            - run:
+                  name: Configure git user.
+                  command: source 'scripts/index.sh' && configure_git_user
+            - run:
+                  name: Bump version.
+                  command: source 'scripts/index.sh' && bump_version
+
+workflows:
+    version: 2
+
+    build-test-and-release:
+        jobs:
+            - fetch_dependencies
+            - unit_test:
+                  requires:
+                      - fetch_dependencies
+            - build:
+                  requires:
+                      - fetch_dependencies
+                  filters:
+                      branches:
+                          only:
+                              - master
+            - release_to_github:
+                  requires:
+                      - unit_test
+                      - build
+                  filters:
+                      branches:
+                          only:
+                              - master
+            - bump:
+                  requires:
+                      - release_to_github
+                  filters:
+                      branches:
+                          only:
+                              - master
