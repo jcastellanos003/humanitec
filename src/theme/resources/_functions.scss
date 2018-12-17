@@ -1,0 +1,10 @@
+@import 'pallete';
+
+@function color($key) {
+    @if map-has-key($sggt-palette, $key) {
+        @return map-get($sggt-palette, $key);
+    }
+
+    @warn "Not found `#{$key}` in $colors list";
+    @return null;
+}

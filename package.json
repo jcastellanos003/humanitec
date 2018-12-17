@@ -9,7 +9,7 @@
     "scripts": {
         "ng": "ng",
         "start": "node server.js",
-        "start:dev": "ng serve --port 7003",
+        "start:dev": "ng serve",
         "build": "ng build --prod --aot --build-optimizer",
         "postinstall": "npm run build",
         "test": "ng test",
