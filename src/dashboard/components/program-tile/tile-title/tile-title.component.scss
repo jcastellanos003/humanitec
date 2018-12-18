@@ -1,0 +1,9 @@
+@import 'resources';
+
+$color--blue: color('blue-light');
+
+span {
+    font-weight: bold;
+    font-size: 1rem;
+    color: $color--blue;
+}

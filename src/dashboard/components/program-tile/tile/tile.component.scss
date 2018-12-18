@@ -1,0 +1,39 @@
+@import 'resources';
+
+$background--color: color('white');
+$color--blue: color('blue');
+$color--gray: color('gray-light');
+$color--slate: color('slate');
+
+.card {
+    max-width: 300px;
+    min-width: 250px;
+    height: 100%;
+    padding: 0;
+    background: $background--color;
+    cursor: pointer;
+    transition: 0.2s all ease;
+    padding: 1rem;
+    text-align: center;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &.done {
+        background: $color--gray;
+        border-color: $color--blue;
+
+        &:after {
+            content: '';
+            border-radius: 50%;
+            background: $color--blue url('/assets/checked.svg') no-repeat center center;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-size: 10px;
+        }
+    }
+}

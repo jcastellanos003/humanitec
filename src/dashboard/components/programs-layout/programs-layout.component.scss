@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.layout {
+    margin-top: 5rem;
+    padding: 2rem 2rem;
+}
+
+.programs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    program-tile {
+        margin: 1rem;
+    }
+}

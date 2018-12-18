@@ -1,0 +1,17 @@
+@import '../typography/variables';
+@import '../global/variables';
+
+mat-form-field.mat-form-field {
+    font-size: $default-form-font-size;
+    font-family: $font-family-main;
+}
+
+button.mat-stroked-button {
+    font-family: $font-family-main;
+}
+
+mat-card.mat-card {
+    font-size: $default-form-font-size;
+    font-family: $font-family-main;
+    border-radius: $element-radius;
+}

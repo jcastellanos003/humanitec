@@ -1,0 +1,26 @@
+@import 'resources';
+
+$color--slate: color('slate');
+
+:host {
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    color: $color--slate;
+}
+
+span {
+    padding: 0.4rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & mat-icon.mat-icon {
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

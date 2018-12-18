@@ -1,0 +1,9 @@
+@import 'resources';
+
+$color--text: color('blue-light');
+$color--border-line: color('blue-dark');
+
+h3 {
+    color: $color--text;
+    border-bottom: 2px solid $color--border-line;
+}

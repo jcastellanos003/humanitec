@@ -1,0 +1,23 @@
+@import 'resources';
+
+$color--gray: color('gray-light');
+$color--blue-light: color('blue-light');
+$color--blue-dark: color('blue-dark');
+$color--slate: color('slate');
+
+:host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: linear-gradient(to left, $color--blue-light, $color--blue-dark);
+    box-shadow: -1px 1px 13px 0px $color--slate;
+    display: flex;
+    padding: 2rem;
+    width: 100%;
+}
+
+img {
+    max-width: 17.7rem;
+    cursor: pointer;
+}

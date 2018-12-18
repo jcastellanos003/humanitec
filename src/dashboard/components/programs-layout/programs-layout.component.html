@@ -1,0 +1,16 @@
+<app-header></app-header>
+
+<div class="layout">
+
+    <app-subtitle [title]="title"></app-subtitle>
+
+    <div class="programs">
+
+        <program-tile
+            *ngFor="let program of programs"
+            [program]="program"
+        ></program-tile>
+
+    </div>
+
+</div>
