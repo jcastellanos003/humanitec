@@ -19,6 +19,7 @@
         ],
         "paths": {
             "@humanitec/shared": ["src/shared"],
+            "@humanitec/shared/tokens": ["src/shared/tokens"],
             "@humanitec/core": ["src/core"]
         }
     }

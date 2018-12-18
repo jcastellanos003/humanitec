@@ -27,9 +27,9 @@ $color--slate: color('slate');
         &:after {
             content: '';
             border-radius: 50%;
-            background: $color--blue url('/assets/checked.svg') no-repeat center center;
-            width: 16px;
-            height: 16px;
+            background: $color--blue url('/assets/dollar_sign.svg') no-repeat center center;
+            width: 20px;
+            height: 20px;
             position: absolute;
             top: -5px;
             right: -5px;

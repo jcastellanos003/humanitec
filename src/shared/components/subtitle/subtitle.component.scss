@@ -6,4 +6,5 @@ $color--border-line: color('blue-dark');
 h3 {
     color: $color--text;
     border-bottom: 2px solid $color--border-line;
+    padding-bottom: 0.5rem;
 }

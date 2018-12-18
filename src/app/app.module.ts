@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 
+import { HumanitecCoreModule, AppConfig } from '@humanitec/core';
+
 import { AppComponent } from './containers/app.component';
 import { NotFoundComponent } from './components/not-found.component';
+
+import { environment } from '../environments/environment';
 
 export const ROUTES: Routes = [
     {
@@ -15,12 +19,18 @@ export const ROUTES: Routes = [
     { path: '**', component: NotFoundComponent }
 ];
 
+export const APP_CONFIG: AppConfig = {
+    appConfigUrl: environment.APP_CONFIG_URL,
+    assetsPath: environment.ASSETS_PATH
+};
+
 @NgModule({
     declarations: [AppComponent, NotFoundComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(ROUTES)
+        RouterModule.forRoot(ROUTES),
+        HumanitecCoreModule.forRoot(APP_CONFIG)
     ],
     providers: [],
     bootstrap: [AppComponent]
