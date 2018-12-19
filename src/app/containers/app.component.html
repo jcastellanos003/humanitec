@@ -1,2 +1,8 @@
 <app-loading *ngIf="showLoader"></app-loading>
-<router-outlet (activate)='onActivate()'></router-outlet>
+
+<app-header></app-header>
+
+<router-outlet
+    (activate)="onRouterChanged()"
+    (deactivate)="onRouterChanged()"
+></router-outlet>

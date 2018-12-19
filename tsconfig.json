@@ -23,6 +23,7 @@
             "@humanitec/core": ["src/core"],
             "@humanitec/utils": ["src/utils"],
             "@humanitec/state/dashboard": ["src/state/dashboard"],
+            "@humanitec/state/activities": ["src/state/activities"],
             "@humanitec/state/router": ["src/state/router"]
         }
     }

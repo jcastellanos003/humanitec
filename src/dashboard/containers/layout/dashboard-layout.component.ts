@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { Program } from '@humanitec/core';
 import { DashboardState, getAllPrograms } from '@humanitec/state/dashboard';
+import { RouterState, Go } from '@humanitec/state/router';
 
 import { Observable } from 'rxjs';
 
@@ -15,9 +16,17 @@ import { Observable } from 'rxjs';
 export class DashboardLayoutComponent implements OnInit {
     programs$: Observable<Program[]>;
 
-    constructor(private store: Store<DashboardState>) {}
+    constructor(private store: Store<DashboardState | RouterState>) {}
 
     ngOnInit() {
         this.programs$ = this.store.select(getAllPrograms);
+    }
+
+    onProgramSelected(program: Program): void {
+        this.store.dispatch(
+            new Go({
+                path: ['/activities/list/', program.id]
+            })
+        );
     }
 }

@@ -7,6 +7,7 @@
         <program-tile
             *ngFor="let program of programs"
             [program]="program"
+            (selected)="onProgramSelected($event)"
         ></program-tile>
 
     </div>

@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
     showLoader = true;
 
-    onActivate(): void {
+    onRouterChanged(): void {
         this.showLoader = !this.showLoader;
     }
 }

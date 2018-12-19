@@ -1,6 +1,7 @@
 <mat-card
     class="card"
     [class.done]="isDone"
+    (click)="onSelected()"
 >
 
     <program-tile-title [title]="title"></program-tile-title>

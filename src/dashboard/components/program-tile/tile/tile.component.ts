@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Program } from '@humanitec/core';
 
@@ -8,7 +8,10 @@ import { Program } from '@humanitec/core';
     styleUrls: ['./tile.component.scss']
 })
 export class ProgramTileComponent {
-    @Input() program: Program;
+    @Input()
+    program: Program;
+    @Output()
+    selected = new EventEmitter<Program>();
 
     private readonly _doneStatus = 'green';
 
@@ -18,5 +21,9 @@ export class ProgramTileComponent {
 
     get title(): string {
         return this.program.name;
+    }
+
+    onSelected(): void {
+        this.selected.emit(this.program);
     }
 }

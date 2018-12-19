@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Program } from '@humanitec/core';
 
@@ -8,9 +8,16 @@ import { Program } from '@humanitec/core';
     styleUrls: ['./programs-layout.component.scss']
 })
 export class ProgramsLayoutComponent {
-    @Input() programs: Array<Program>;
+    @Input()
+    programs: Array<Program>;
+    @Output()
+    programSelected = new EventEmitter<Program>();
 
     get title(): string {
         return `Programs (${this.programs.length})`;
+    }
+
+    onProgramSelected(event: Program) {
+        this.programSelected.emit(event);
     }
 }

@@ -1,3 +1,4 @@
-<app-header></app-header>
-
-<programs-layout [programs]="(programs$ | async)"></programs-layout>
+<programs-layout
+    [programs]="(programs$ | async)"
+    (programSelected)="onProgramSelected($event)"
+></programs-layout>

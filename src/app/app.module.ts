@@ -29,6 +29,11 @@ export const ROUTES: Routes = [
         path: '',
         loadChildren: '../dashboard/dashboard.module#HumanitecDashboardModule'
     },
+    {
+        path: 'activities',
+        loadChildren:
+            '../activities/activities.module#HumanitecActivitiesModule'
+    },
     { path: '', pathMatch: 'full', redirectTo: '/' },
     { path: '**', component: NotFoundComponent }
 ];
