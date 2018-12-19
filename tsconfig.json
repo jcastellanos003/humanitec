@@ -20,7 +20,10 @@
         "paths": {
             "@humanitec/shared": ["src/shared"],
             "@humanitec/shared/tokens": ["src/shared/tokens"],
-            "@humanitec/core": ["src/core"]
+            "@humanitec/core": ["src/core"],
+            "@humanitec/utils": ["src/utils"],
+            "@humanitec/state/dashboard": ["src/state/dashboard"],
+            "@humanitec/state/router": ["src/state/router"]
         }
     }
 }

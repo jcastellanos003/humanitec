@@ -1,6 +1,6 @@
-export interface ApiModulesConfig {
-    dashboard: string;
-    activities: string;
+export interface ApiFeaturesConfig {
+    dashboard: { programs: string };
+    activities: { activity: string };
 }
 
 export interface ApiAuthConfig {
@@ -10,7 +10,7 @@ export interface ApiAuthConfig {
 export interface ApiConfig {
     url: string;
     auth: ApiAuthConfig;
-    modules: ApiModulesConfig;
+    features: ApiFeaturesConfig;
 }
 
 export interface StaticConfig {

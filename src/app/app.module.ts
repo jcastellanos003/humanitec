@@ -3,12 +3,26 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 
+import { StoreModule, MetaReducer } from '@ngrx/store';
+import {
+    StoreRouterConnectingModule,
+    RouterStateSerializer
+} from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { storeFreeze } from 'ngrx-store-freeze';
+
+import { reducers, effects, CustomSerializer } from '@humanitec/state/router';
 import { HumanitecCoreModule, AppConfig } from '@humanitec/core';
 
 import { AppComponent } from './containers/app.component';
-import { NotFoundComponent } from './components/not-found.component';
+import { components, NotFoundComponent } from './components';
 
 import { environment } from '../environments/environment';
+
+export const META_REDUCERS: MetaReducer<any>[] = !environment.production
+    ? [storeFreeze]
+    : [];
 
 export const ROUTES: Routes = [
     {
@@ -25,14 +39,23 @@ export const APP_CONFIG: AppConfig = {
 };
 
 @NgModule({
-    declarations: [AppComponent, NotFoundComponent],
+    declarations: [AppComponent, ...components],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        StoreModule.forRoot(reducers, { metaReducers: META_REDUCERS }),
+        EffectsModule.forRoot(effects),
         RouterModule.forRoot(ROUTES),
-        HumanitecCoreModule.forRoot(APP_CONFIG)
+        StoreRouterConnectingModule.forRoot(),
+        HumanitecCoreModule.forRoot(APP_CONFIG),
+        environment.production ? [] : StoreDevtoolsModule.instrument()
     ],
-    providers: [],
+    providers: [
+        {
+            provide: RouterStateSerializer,
+            useClass: CustomSerializer
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class HumanitecAppModule {}

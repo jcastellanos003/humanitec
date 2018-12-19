@@ -4,9 +4,13 @@
         "auth": {
             "token": "Bearer GfR6vIHG0zTWaJle6TjNXvYUrjDn6g"
         },
-        "modules": {
-            "dashboard": "workflowlevel1",
-            "activities": "workflowlevel2"
+        "features": {
+            "dashboard": {
+                "programs": "workflowlevel1"
+            },
+            "activities": {
+                "activity": "workflowlevel2"
+            }
         }
     }
 }

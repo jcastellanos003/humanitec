@@ -2,8 +2,12 @@
 
 $color--blue: color('blue-light');
 
-span {
+h5 {
     font-weight: bold;
     font-size: 1rem;
     color: $color--blue;
+    width: 230px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
