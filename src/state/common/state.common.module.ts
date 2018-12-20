@@ -7,13 +7,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { ApiConfig } from '@humanitec/core';
 import { ApiConfigInjectionToken } from '@humanitec/shared/tokens';
 
-import { reducers, effects, FEATURE_DASHBOARD_NAME } from './store';
+import { reducers, effects, FEATURE_COMMON_NAME } from './store';
 
 import { ProgramsService } from './services/programs.service';
 
 @NgModule({
     imports: [
-        StoreModule.forFeature(FEATURE_DASHBOARD_NAME, reducers),
+        StoreModule.forFeature(FEATURE_COMMON_NAME, reducers),
         EffectsModule.forFeature(effects)
     ],
     providers: [
@@ -24,7 +24,7 @@ import { ProgramsService } from './services/programs.service';
         }
     ]
 })
-export class HumanitecDashboardStateModule {}
+export class HumanitecCommonStateModule {}
 
 export function programsServiceFactory(
     httpClient: HttpClient,

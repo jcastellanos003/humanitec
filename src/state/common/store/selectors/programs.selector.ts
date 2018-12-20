@@ -1,6 +1,9 @@
 import { createSelector } from '@ngrx/store';
 
-import { getDashboardState, DashboardState } from '../reducers';
+import { Program } from '@humanitec/core';
+import { getRouterState } from '@humanitec/state/router';
+
+import { getCommonState, CommonState } from '../reducers';
 import {
     getProgramsEntitiesState,
     getProgramsLoadedState,
@@ -8,8 +11,8 @@ import {
 } from '../reducers/programs.reducer';
 
 export const getProgramsState = createSelector(
-    getDashboardState,
-    (state: DashboardState) => state.programs
+    getCommonState,
+    (state: CommonState) => state.programs
 );
 
 export const getProgramsEntities = createSelector(
@@ -31,5 +34,13 @@ export const getAllPrograms = createSelector(
     getProgramsEntities,
     entities => {
         return Object.keys(entities).map(id => entities[parseInt(id, 10)]);
+    }
+);
+
+export const getSelectedProgram = createSelector(
+    getProgramsEntities,
+    getRouterState,
+    (entities, router): Program => {
+        return router.state && entities[router.state.params.programId];
     }
 );

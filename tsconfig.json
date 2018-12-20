@@ -10,19 +10,15 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "target": "es5",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "lib": [
-            "es2017",
-            "dom"
-        ],
+        "typeRoots": ["node_modules/@types"],
+        "lib": ["es2017", "dom"],
         "paths": {
             "@humanitec/shared": ["src/shared"],
             "@humanitec/shared/tokens": ["src/shared/tokens"],
+            "@humanitec/shared/guards": ["src/shared/guards"],
             "@humanitec/core": ["src/core"],
             "@humanitec/utils": ["src/utils"],
-            "@humanitec/state/dashboard": ["src/state/dashboard"],
+            "@humanitec/state/common": ["src/state/common"],
             "@humanitec/state/activities": ["src/state/activities"],
             "@humanitec/state/router": ["src/state/router"]
         }

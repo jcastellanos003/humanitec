@@ -28,6 +28,7 @@ export function activityReducer(
         case LOAD_ACTIVITIES:
             return {
                 ...state,
+                loaded: false,
                 loading: true
             };
 

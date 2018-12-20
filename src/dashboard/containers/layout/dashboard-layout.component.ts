@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Program } from '@humanitec/core';
-import { DashboardState, getAllPrograms } from '@humanitec/state/dashboard';
+import { CommonState, getAllPrograms } from '@humanitec/state/common';
 import { RouterState, Go } from '@humanitec/state/router';
 
 import { Observable } from 'rxjs';
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class DashboardLayoutComponent implements OnInit {
     programs$: Observable<Program[]>;
 
-    constructor(private store: Store<DashboardState | RouterState>) {}
+    constructor(private store: Store<CommonState | RouterState>) {}
 
     ngOnInit() {
         this.programs$ = this.store.select(getAllPrograms);

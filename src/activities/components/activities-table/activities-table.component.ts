@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Activity } from '@humanitec/core';
 
@@ -7,21 +7,13 @@ import { Activity } from '@humanitec/core';
     templateUrl: './activities-table.component.html',
     styleUrls: ['./activities-table.component.scss']
 })
-export class ActivitiesTableComponent implements OnInit {
+export class ActivitiesTableComponent {
     @Input()
     activities: Activity[];
 
-    displayedColumns: Array<string>;
+    displayedColumns = ['id', 'name', 'startDate', 'endDate'];
 
     get hasActivities(): boolean {
         return this.activities && this.activities.length > 0;
-    }
-
-    ngOnInit() {
-        if (this.hasActivities) {
-            this.displayedColumns = Object.getOwnPropertyNames(
-                this.activities[0]
-            );
-        }
     }
 }

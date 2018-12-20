@@ -37,6 +37,19 @@ export const getAllActivities = createSelector(
     }
 );
 
+export const getActivitiesByProgramId = createSelector(
+    getAllActivities,
+    getRouterState,
+    (activities, router): Activity[] => {
+        return (
+            router.state &&
+            activities.filter(
+                a => a.programId === +router.state.params.programId
+            )
+        );
+    }
+);
+
 export const getSelectedActivity = createSelector(
     getActivityList,
     getRouterState,

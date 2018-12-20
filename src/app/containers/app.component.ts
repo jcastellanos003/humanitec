@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
     showLoader = true;
 
-    onRouterChanged(): void {
-        this.showLoader = !this.showLoader;
+    toggleLoader(hideLoader: boolean): void {
+        this.showLoader = hideLoader;
     }
 }

@@ -5,11 +5,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule, MatCardModule } from '@angular/material';
 
 import { HumanitecSharedModule } from '@humanitec/shared';
-import { HumanitecDashboardStateModule } from '@humanitec/state/dashboard';
+import { sharedGuards, ProgramsGuard } from '@humanitec/shared/guards';
+import { HumanitecCommonStateModule } from '@humanitec/state/common';
 
 import { containers, DashboardLayoutComponent } from './containers';
 import { components } from './components';
-import { guards, ProgramsGuard } from './guards';
 
 export const ROUTES: Routes = [
     {
@@ -31,8 +31,8 @@ export class HumanitecDashboardMaterialModule {}
         RouterModule.forChild(ROUTES),
         HumanitecDashboardMaterialModule,
         HumanitecSharedModule,
-        HumanitecDashboardStateModule
+        HumanitecCommonStateModule
     ],
-    providers: guards
+    providers: sharedGuards
 })
 export class HumanitecDashboardModule {}

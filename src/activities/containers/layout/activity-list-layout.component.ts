@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Activity } from '@humanitec/core';
-import { ActivitiesState, getAllActivities } from '@humanitec/state/activities';
+import { Activity, Program } from '@humanitec/core';
+import {
+    ActivitiesState,
+    getActivitiesByProgramId
+} from '@humanitec/state/activities';
+import { CommonState, getSelectedProgram } from '@humanitec/state/common';
 
 import { Observable } from 'rxjs';
 
@@ -14,10 +18,12 @@ import { Observable } from 'rxjs';
 })
 export class ActivityListLayoutComponent implements OnInit {
     activities$: Observable<Activity[]>;
+    program$: Observable<Program>;
 
-    constructor(private store: Store<ActivitiesState>) {}
+    constructor(private store: Store<ActivitiesState | CommonState>) {}
 
     ngOnInit() {
-        this.activities$ = this.store.select(getAllActivities);
+        this.activities$ = this.store.select(getActivitiesByProgramId);
+        this.program$ = this.store.select(getSelectedProgram);
     }
 }

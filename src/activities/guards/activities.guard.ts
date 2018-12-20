@@ -5,13 +5,12 @@ import { Store } from '@ngrx/store';
 
 import {
     ActivitiesState,
-    getActivityList,
     getActivityListLoaded,
     LoadActivities
 } from '@humanitec/state/activities';
 
 import { Observable, of } from 'rxjs';
-import { take, switchMap, filter, tap, catchError } from 'rxjs/operators';
+import { take, switchMap, filter, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ActivitiesGuard implements CanActivateChild {
@@ -27,13 +26,8 @@ export class ActivitiesGuard implements CanActivateChild {
     }
 
     checkStore(programId: number): Observable<boolean> {
+        this.store.dispatch(new LoadActivities(programId));
         return this.store.select(getActivityListLoaded).pipe(
-            tap(loaded => {
-                console.log('check activities:', loaded);
-                if (!loaded) {
-                    this.store.dispatch(new LoadActivities(programId));
-                }
-            }),
             filter(loaded => loaded),
             take(1)
         );

@@ -4,17 +4,17 @@ import { CanActivate } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import {
-    DashboardState,
+    CommonState,
     getProgramsLoaded,
     LoadPrograms
-} from '@humanitec/state/dashboard';
+} from '@humanitec/state/common';
 
 import { Observable, of } from 'rxjs';
 import { take, switchMap, filter, tap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ProgramsGuard implements CanActivate {
-    constructor(private store: Store<DashboardState>) {}
+    constructor(private store: Store<CommonState>) {}
 
     canActivate(): Observable<boolean> {
         return this.checkStore().pipe(

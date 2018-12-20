@@ -1,1 +1,4 @@
-<activities-table [activities]="(activities$ | async)"></activities-table>
+<activities-layout
+    [activities]="(activities$ | async)"
+    [program]="(program$ | async)"
+></activities-layout>

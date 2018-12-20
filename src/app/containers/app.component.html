@@ -1,8 +1,8 @@
-<app-loading *ngIf="showLoader"></app-loading>
+<app-loader *ngIf="showLoader"></app-loader>
 
 <app-header></app-header>
 
 <router-outlet
-    (activate)="onRouterChanged()"
-    (deactivate)="onRouterChanged()"
+    (activate)="toggleLoader(false)"
+    (deactivate)="toggleLoader(true)"
 ></router-outlet>

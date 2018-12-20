@@ -18,6 +18,7 @@ export class ActivityService {
             map(activities =>
                 activities.map(a => ({
                     id: a.id,
+                    programId,
                     name: a.name,
                     startDate: a['expected_start_date'],
                     endDate: a['expected_end_date']

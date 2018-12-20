@@ -6,15 +6,18 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatTableModule } from '@angular/material';
 
 import { HumanitecSharedModule } from '@humanitec/shared';
+import { sharedGuards, ProgramsGuard } from '@humanitec/shared/guards';
 import { HumanitecActivitiesStateModule } from '@humanitec/state/activities';
+import { HumanitecCommonStateModule } from '@humanitec/state/common';
 
 import { containers, ActivityListLayoutComponent } from './containers';
 import { components } from './components';
-import { guards, ActivitiesGuard } from './guards';
+import { activitiesGuards, ActivitiesGuard } from './guards';
 
 export const ROUTES: Routes = [
     {
         path: 'list',
+        canActivate: [ProgramsGuard],
         canActivateChild: [ActivitiesGuard],
         children: [
             {
@@ -37,8 +40,9 @@ export class HumanitecActivitiesMaterialModule {}
         RouterModule.forChild(ROUTES),
         HumanitecActivitiesMaterialModule,
         HumanitecSharedModule,
-        HumanitecActivitiesStateModule
+        HumanitecActivitiesStateModule,
+        HumanitecCommonStateModule
     ],
-    providers: guards
+    providers: [...sharedGuards, ...activitiesGuards]
 })
 export class HumanitecActivitiesModule {}

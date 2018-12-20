@@ -13,10 +13,12 @@ export class ProgramTileComponent {
     @Output()
     selected = new EventEmitter<Program>();
 
-    private readonly _doneStatus = 'green';
+    showLoader = false;
+
+    private readonly doneStatus = 'green';
 
     get isDone(): boolean {
-        return this.program.status === this._doneStatus;
+        return this.program.status === this.doneStatus;
     }
 
     get title(): string {
@@ -24,6 +26,7 @@ export class ProgramTileComponent {
     }
 
     onSelected(): void {
+        this.showLoader = !this.showLoader;
         this.selected.emit(this.program);
     }
 }

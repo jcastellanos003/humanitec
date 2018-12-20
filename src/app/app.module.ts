@@ -14,6 +14,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 
 import { reducers, effects, CustomSerializer } from '@humanitec/state/router';
 import { HumanitecCoreModule, AppConfig } from '@humanitec/core';
+import { HumanitecSharedModule } from '@humanitec/shared';
 
 import { AppComponent } from './containers/app.component';
 import { components, NotFoundComponent } from './components';
@@ -53,6 +54,7 @@ export const APP_CONFIG: AppConfig = {
         RouterModule.forRoot(ROUTES),
         StoreRouterConnectingModule.forRoot(),
         HumanitecCoreModule.forRoot(APP_CONFIG),
+        HumanitecSharedModule,
         environment.production ? [] : StoreDevtoolsModule.instrument()
     ],
     providers: [
