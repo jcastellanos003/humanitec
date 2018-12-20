@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 
-import { MatTableModule } from '@angular/material';
+import {
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule
+} from '@angular/material';
 
 import { HumanitecSharedModule } from '@humanitec/shared';
 import { sharedGuards, ProgramsGuard } from '@humanitec/shared/guards';
@@ -29,7 +33,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-    exports: [CdkTableModule, MatTableModule]
+    exports: [CdkTableModule, MatTableModule, MatButtonModule, MatIconModule]
 })
 export class HumanitecActivitiesMaterialModule {}
 
