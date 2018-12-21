@@ -1,13 +1,5 @@
-import { ActivitiesLayoutComponent } from './activities-layout/activities-layout.component';
-import { ActivitiesTableComponent } from './activities-table/activities-table.component';
-import { AddActivityButtonComponent } from './add-activity-button/add-activity-button.component';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
 
-export * from './activities-layout/activities-layout.component';
-export * from './activities-table/activities-table.component';
-export * from './add-activity-button/add-activity-button.component';
+export * from './activity-form/activity-form.component';
 
-export const components = [
-    ActivitiesLayoutComponent,
-    ActivitiesTableComponent,
-    AddActivityButtonComponent
-];
+export const components = [ActivityFormComponent];

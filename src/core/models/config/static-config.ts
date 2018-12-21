@@ -3,6 +3,14 @@ export interface ApiFeaturesConfig {
     activities: { activity: string };
 }
 
+export interface AppModulesConfig {
+    dashboard: {
+        activityList: {
+            tableConfig: any;
+        };
+    };
+}
+
 export interface ApiAuthConfig {
     token: string;
 }
@@ -15,6 +23,7 @@ export interface ApiConfig {
 
 export interface StaticConfig {
     api: ApiConfig;
+    modules: AppModulesConfig;
 }
 
-export type StaticChunksConfig = 'api';
+export type StaticChunksConfig = 'api' | 'modules';

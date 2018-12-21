@@ -15,10 +15,9 @@
         "paths": {
             "@humanitec/shared": ["src/shared"],
             "@humanitec/shared/tokens": ["src/shared/tokens"],
-            "@humanitec/shared/guards": ["src/shared/guards"],
             "@humanitec/core": ["src/core"],
             "@humanitec/utils": ["src/utils"],
-            "@humanitec/state/common": ["src/state/common"],
+            "@humanitec/state/dashboard": ["src/state/dashboard"],
             "@humanitec/state/activities": ["src/state/activities"],
             "@humanitec/state/router": ["src/state/router"]
         }

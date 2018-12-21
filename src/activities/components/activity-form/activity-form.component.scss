@@ -1,0 +1,36 @@
+@import 'resources';
+
+$form-radius: $element-radius;
+$default-font-size: $default-form-font-size;
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-content {
+    padding: 0.2rem;
+}
+
+.submit {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+form {
+    padding: 1rem;
+    max-width: 500px;
+    width: 100%;
+    border-radius: $form-radius;
+}
+
+
+mat-label {
+    font-size: $default-font-size;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-top: 1rem;
+}

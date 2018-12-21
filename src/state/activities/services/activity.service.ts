@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Activity } from '@humanitec/core';
+import { DEFAULT_DATE_FORMAT } from '@humanitec/utils';
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+
+import * as moment from 'moment';
 
 @Injectable()
 export class ActivityService {
@@ -20,8 +23,12 @@ export class ActivityService {
                     id: a.id,
                     programId,
                     name: a.name,
-                    startDate: a['expected_start_date'],
-                    endDate: a['expected_end_date']
+                    startDate: moment(a['expected_start_date']).format(
+                        DEFAULT_DATE_FORMAT
+                    ),
+                    endDate: moment(a['expected_end_date']).format(
+                        DEFAULT_DATE_FORMAT
+                    )
                 }))
             ),
             catchError((error: any) => throwError(error.json()))

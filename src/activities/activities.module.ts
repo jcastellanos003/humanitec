@@ -1,39 +1,43 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CdkTableModule } from '@angular/cdk/table';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {
-    MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 
 import { HumanitecSharedModule } from '@humanitec/shared';
-import { sharedGuards, ProgramsGuard } from '@humanitec/shared/guards';
 import { HumanitecActivitiesStateModule } from '@humanitec/state/activities';
-import { HumanitecCommonStateModule } from '@humanitec/state/common';
 
-import { containers, ActivityListLayoutComponent } from './containers';
+import { containers, ActivityLayoutComponent } from './containers';
 import { components } from './components';
-import { activitiesGuards, ActivitiesGuard } from './guards';
+import { activitiesGuards, ActivityExistsGuard } from './guards';
 
 export const ROUTES: Routes = [
     {
-        path: 'list',
-        canActivate: [ProgramsGuard],
-        canActivateChild: [ActivitiesGuard],
-        children: [
-            {
-                path: ':programId',
-                component: ActivityListLayoutComponent
-            }
-        ]
+        path: 'new',
+        component: ActivityLayoutComponent
+    },
+    {
+        path: ':activityId',
+        canActivate: [ActivityExistsGuard],
+        component: ActivityLayoutComponent
     }
 ];
 
 @NgModule({
-    exports: [CdkTableModule, MatTableModule, MatButtonModule, MatIconModule]
+    exports: [
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ]
 })
 export class HumanitecActivitiesMaterialModule {}
 
@@ -42,11 +46,11 @@ export class HumanitecActivitiesMaterialModule {}
     imports: [
         CommonModule,
         RouterModule.forChild(ROUTES),
+        ReactiveFormsModule,
         HumanitecActivitiesMaterialModule,
         HumanitecSharedModule,
-        HumanitecActivitiesStateModule,
-        HumanitecCommonStateModule
+        HumanitecActivitiesStateModule
     ],
-    providers: [...sharedGuards, ...activitiesGuards]
+    providers: activitiesGuards
 })
 export class HumanitecActivitiesModule {}

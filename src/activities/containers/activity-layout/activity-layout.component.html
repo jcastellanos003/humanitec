@@ -1,0 +1,12 @@
+<div class="layout">
+
+    <app-subtitle title="Activity management"></app-subtitle>
+
+    <activity-form
+        [activity]="(activity$ | async)"
+        (create)="onCreateActivity($event)"
+        (update)="onUpdateActivity($event)"
+        (delete)="onDeleteActivity($event)"
+    ></activity-form>
+
+</div>

@@ -1,0 +1,16 @@
+<div class="layout">
+
+    <app-subtitle [title]="programTitle"></app-subtitle>
+
+    <add-activity-button
+        class="add-activity"
+        (click)="onCreateActivity()"
+    ></add-activity-button>
+
+    <activities-table
+        [activities]="activities"
+        [tableConfig]="tableConfig"
+        (editActivity)="onEditActivity($event)"
+    ></activities-table>
+
+</div>

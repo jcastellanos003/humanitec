@@ -1,5 +1,5 @@
-import { ActivitiesGuard } from './activities.guard';
+import { ActivityExistsGuard } from './activity-exists.guard';
 
-export * from './activities.guard';
+export * from './activity-exists.guard';
 
-export const activitiesGuards = [ActivitiesGuard];
+export const activitiesGuards = [ActivityExistsGuard];

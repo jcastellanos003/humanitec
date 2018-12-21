@@ -1,9 +1,12 @@
 import { NgModule, ModuleWithProviders, APP_INITIALIZER } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { ApiConfigInjectionToken } from '@humanitec/shared/tokens';
+import {
+    ApiConfigInjectionToken,
+    AppModulesConfigInjectionToken
+} from '@humanitec/shared/tokens';
 
-import { AppConfig, ApiConfig } from './models';
+import { AppConfig, ApiConfig, AppModulesConfig } from './models';
 import { AppConfigInjectionToken } from './tokens/app-config.injection-token';
 import { CustomHttpInterceptor } from './interceptors/http/http.interceptor';
 import { StaticConfigService } from './services/static.service';
@@ -32,6 +35,11 @@ export class HumanitecCoreModule {
                     deps: [StaticConfigService]
                 },
                 {
+                    provide: AppModulesConfigInjectionToken,
+                    useFactory: getAppModulesConfig,
+                    deps: [StaticConfigService]
+                },
+                {
                     provide: HTTP_INTERCEPTORS,
                     useClass: CustomHttpInterceptor,
                     multi: true
@@ -51,4 +59,8 @@ export function loadStaticConfig(
 
 export function getApiConfig(staticConfigService: StaticConfigService) {
     return staticConfigService.get<ApiConfig>('api');
+}
+
+export function getAppModulesConfig(staticConfigService: StaticConfigService) {
+    return staticConfigService.get<AppModulesConfig>('modules');
 }

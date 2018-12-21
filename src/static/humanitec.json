@@ -12,5 +12,26 @@
                 "activity": "workflowlevel2"
             }
         }
+    },
+    "modules": {
+        "dashboard": {
+            "activityList": {
+                "tableConfig": {
+                    "id": {
+                        "label": "Id"
+                    },
+                    "startDate": {
+                        "label": "Start Date"
+                    },
+                    "endDate": {
+                        "label": "End Date"
+                    },
+                    "edit": {
+                        "label": "edit",
+                        "action": "edit"
+                    }
+                }
+            }
+        }
     }
 }

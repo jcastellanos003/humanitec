@@ -31,7 +31,7 @@ export const ROUTES: Routes = [
         loadChildren: '../dashboard/dashboard.module#HumanitecDashboardModule'
     },
     {
-        path: 'activities',
+        path: 'activity',
         loadChildren:
             '../activities/activities.module#HumanitecActivitiesModule'
     },

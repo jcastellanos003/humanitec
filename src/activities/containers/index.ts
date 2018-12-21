@@ -1,5 +1,5 @@
-import { ActivityListLayoutComponent } from './layout/activity-list-layout.component';
+import { ActivityLayoutComponent } from './activity-layout/activity-layout.component';
 
-export * from './layout/activity-list-layout.component';
+export * from './activity-layout/activity-layout.component';
 
-export const containers = [ActivityListLayoutComponent];
+export const containers = [ActivityLayoutComponent];

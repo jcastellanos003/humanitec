@@ -1,0 +1,102 @@
+<form
+    [formGroup]="activityForm"
+    (ngSubmit)="onSubmit()"
+>
+    <div class="form-content">
+
+        <mat-form-field floatLabel="always">
+            <mat-label>Name</mat-label>
+
+            <input
+                type="text"
+                formControlName="name"
+                tabindex="1"
+                matInput
+            />
+
+            <mat-error *ngIf="fieldErrored('name')">
+                Please add a name
+            </mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always">
+            <mat-label>Start date</mat-label>
+
+            <input
+                matInput
+                [matDatepicker]="sd"
+                placeholder="dd/mm/yyyy"
+                formControlName="startDate"
+            >
+
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="sd"
+            ></mat-datepicker-toggle>
+
+            <mat-datepicker
+                touchUi
+                #sd
+            ></mat-datepicker>
+
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always">
+            <mat-label>Start date</mat-label>
+
+            <input
+                matInput
+                [matDatepicker]="ed"
+                placeholder="dd/mm/yyyy"
+                formControlName="endDate"
+            >
+
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="ed"
+            ></mat-datepicker-toggle>
+
+            <mat-datepicker
+                touchUi
+                #ed
+            ></mat-datepicker>
+
+        </mat-form-field>
+
+        <button
+            *ngIf="!isEdition"
+            type="button"
+            class="submit"
+            mat-stroked-button
+            (click)="createActivity(activityForm)"
+        >
+            Create
+        </button>
+
+        <div *ngIf="isEdition">
+
+            <button
+                type="button"
+                class="submit"
+                mat-stroked-button
+                (click)="updateActivity(activityForm)"
+            >
+                Update
+            </button>
+
+            <button
+                type="button"
+                class="submit"
+                color="warn"
+                mat-stroked-button
+                (click)="deleteActivity(activityForm)"
+            >
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+</form>

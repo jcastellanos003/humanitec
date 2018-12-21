@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { StaticConfig, StaticChunksConfig, ApiConfig } from '../models';
+import {
+    StaticConfig,
+    StaticChunksConfig,
+    ApiConfig,
+    AppModulesConfig
+} from '../models';
 
 @Injectable()
 export class StaticConfigService {
@@ -12,7 +17,7 @@ export class StaticConfigService {
         return (this.staticConfig = config);
     }
 
-    get<T extends ApiConfig>(key: StaticChunksConfig): T {
+    get<T extends ApiConfig | AppModulesConfig>(key: StaticChunksConfig): T {
         const res = this.staticConfig[key];
         return <T>res;
     }

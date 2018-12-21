@@ -1,26 +1,60 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { CdkTableModule } from '@angular/cdk/table';
 
-import { MatIconModule, MatCardModule } from '@angular/material';
+import {
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
+} from '@angular/material';
 
 import { HumanitecSharedModule } from '@humanitec/shared';
-import { sharedGuards, ProgramsGuard } from '@humanitec/shared/guards';
-import { HumanitecCommonStateModule } from '@humanitec/state/common';
+import { HumanitecDashboardStateModule } from '@humanitec/state/dashboard';
+import { HumanitecActivitiesStateModule } from '@humanitec/state/activities';
 
-import { containers, DashboardLayoutComponent } from './containers';
+import {
+    containers,
+    DashboardLayoutComponent,
+    ProgramDetailsLayoutComponent
+} from './containers';
 import { components } from './components';
+import {
+    dashboardGuards,
+    ActivitiesListGuard,
+    ProgramsGuard,
+    StaticConfigGuard
+} from './guards';
 
 export const ROUTES: Routes = [
     {
         path: '',
         canActivate: [ProgramsGuard],
         component: DashboardLayoutComponent
+    },
+    {
+        path: 'program',
+        canActivate: [ProgramsGuard],
+        canActivateChild: [ActivitiesListGuard, StaticConfigGuard],
+        children: [
+            {
+                path: ':programId',
+                component: ProgramDetailsLayoutComponent
+            }
+        ]
     }
 ];
 
 @NgModule({
-    exports: [MatIconModule, MatCardModule]
+    exports: [
+        CdkTableModule,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        MatIconModule,
+        MatCardModule
+    ]
 })
 export class HumanitecDashboardMaterialModule {}
 
@@ -31,8 +65,9 @@ export class HumanitecDashboardMaterialModule {}
         RouterModule.forChild(ROUTES),
         HumanitecDashboardMaterialModule,
         HumanitecSharedModule,
-        HumanitecCommonStateModule
+        HumanitecDashboardStateModule,
+        HumanitecActivitiesStateModule
     ],
-    providers: sharedGuards
+    providers: dashboardGuards
 })
 export class HumanitecDashboardModule {}
