@@ -43,10 +43,10 @@ export class ProgramDetailsLayoutComponent implements OnInit {
         );
     }
 
-    onCreateActivity(): void {
+    onCreateActivity(program: Program): void {
         this.store.dispatch(
             new Go({
-                path: ['/activity/new']
+                path: ['/activity/new', btoa(program.url)]
             })
         );
     }

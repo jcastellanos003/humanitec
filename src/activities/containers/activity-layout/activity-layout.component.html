@@ -6,6 +6,7 @@
 
     <activity-form
         [activity]="(activity$ | async)"
+        [programUrl]="(programUrl$ | async)"
         (create)="onCreateActivity($event)"
         (update)="onUpdateActivity($event)"
         (delete)="onDeleteActivity($event)"

@@ -5,7 +5,10 @@ import { Store } from '@ngrx/store';
 import {
     ActivitiesState,
     getSelectedActivity,
-    UpdateActivity
+    UpdateActivity,
+    getProgramUrl,
+    CreateActivity,
+    DeleteActivity
 } from '@humanitec/state/activities';
 import { Activity } from '@humanitec/core';
 
@@ -18,6 +21,7 @@ import { Observable } from 'rxjs';
 })
 export class ActivityLayoutComponent implements OnInit {
     activity$: Observable<Activity>;
+    programUrl$: Observable<string>;
 
     showLoader = false;
 
@@ -25,11 +29,12 @@ export class ActivityLayoutComponent implements OnInit {
 
     ngOnInit() {
         this.activity$ = this.store.select(getSelectedActivity);
+        this.programUrl$ = this.store.select(getProgramUrl);
     }
 
     onCreateActivity(activity: Activity) {
         this.toggleLoader();
-        console.log('creating activity', activity);
+        this.store.dispatch(new CreateActivity(activity));
     }
 
     onUpdateActivity(activity: Activity) {
@@ -37,9 +42,9 @@ export class ActivityLayoutComponent implements OnInit {
         this.store.dispatch(new UpdateActivity(activity));
     }
 
-    onDeleteActivity(activity: Activity) {
+    onDeleteActivity(activityId: number) {
         this.toggleLoader();
-        console.log('deleting activity', activity);
+        this.store.dispatch(new DeleteActivity(activityId));
     }
 
     toggleLoader(): void {

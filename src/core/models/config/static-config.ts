@@ -1,6 +1,9 @@
 export interface ApiFeaturesConfig {
     dashboard: { programs: string };
-    activities: { activity: string };
+    activities: {
+        activity: string;
+        params: any;
+    };
 }
 
 export interface AppModulesConfig {

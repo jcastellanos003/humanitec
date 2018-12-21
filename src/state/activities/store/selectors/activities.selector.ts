@@ -57,3 +57,10 @@ export const getSelectedActivity = createSelector(
         return router.state && entities[router.state.params.activityId];
     }
 );
+
+export const getProgramUrl = createSelector(
+    getRouterState,
+    (router): string => {
+        return router.state && atob(router.state.params.programUrl || '');
+    }
+);

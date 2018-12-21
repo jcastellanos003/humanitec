@@ -31,12 +31,14 @@ import * as moment from 'moment';
 export class ActivityFormComponent implements OnInit {
     @Input()
     activity: Activity;
+    @Input()
+    programUrl: string;
     @Output()
     create = new EventEmitter<Activity>();
     @Output()
     update = new EventEmitter<Activity>();
     @Output()
-    delete = new EventEmitter<Activity>();
+    delete = new EventEmitter<number>();
 
     activityForm: FormGroup = this.fb.group({
         name: ['', [Validators.required]],
@@ -48,19 +50,19 @@ export class ActivityFormComponent implements OnInit {
         return this.activity && !!this.activity.id;
     }
 
+    get startDate(): string {
+        return this.activityForm.get('startDate').value;
+    }
+
+    get endDate(): string {
+        return this.activityForm.get('endDate').value;
+    }
+
     constructor(private fb: FormBuilder) {}
 
     ngOnInit() {
         if (this.isEdition) {
-            this.activityForm.controls['name'].setValue(this.activity.name);
-
-            this.activityForm.controls['startDate'].setValue(
-                moment(this.activity.expected_start_date, DEFAULT_DATE_FORMAT)
-            );
-
-            this.activityForm.controls['endDate'].setValue(
-                moment(this.activity.expected_end_date, DEFAULT_DATE_FORMAT)
-            );
+            this.patchForm();
         }
     }
 
@@ -68,7 +70,12 @@ export class ActivityFormComponent implements OnInit {
         const { value, valid } = form;
 
         if (valid) {
-            this.create.emit(this.getEntityToPost(value));
+            this.create.emit(<any>{
+                name: value.name,
+                workflowlevel1: this.programUrl,
+                expected_start_date: value.startDate || null,
+                expected_end_date: value.endDate || null
+            });
         }
     }
 
@@ -76,14 +83,20 @@ export class ActivityFormComponent implements OnInit {
         const { value, valid, touched } = form;
 
         if (valid && touched) {
-            this.update.emit(this.getEntityToPost(value));
+            const { id, workflowlevel1 } = this.activity;
+
+            this.update.emit(<any>{
+                id,
+                workflowlevel1,
+                name: value.name,
+                expected_start_date: value.startDate || null,
+                expected_end_date: value.endDate || null
+            });
         }
     }
 
-    deleteActivity(form: FormGroup) {
-        const { value } = form;
-
-        this.delete.emit(this.getEntityToPost(value));
+    deleteActivity() {
+        this.delete.emit(this.activity.id);
     }
 
     fieldErrored(field: string): boolean {
@@ -93,13 +106,15 @@ export class ActivityFormComponent implements OnInit {
         );
     }
 
-    private getEntityToPost(formValue: any): Activity {
-        const { id, workflowlevel1 } = this.activity;
+    private patchForm(): void {
+        this.activityForm.controls['name'].setValue(this.activity.name);
 
-        return {
-            id,
-            workflowlevel1,
-            ...formValue
-        };
+        this.activityForm.controls['startDate'].setValue(
+            moment(this.activity.expected_start_date, DEFAULT_DATE_FORMAT)
+        );
+
+        this.activityForm.controls['endDate'].setValue(
+            moment(this.activity.expected_end_date, DEFAULT_DATE_FORMAT)
+        );
     }
 }

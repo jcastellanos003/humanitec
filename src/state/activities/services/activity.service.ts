@@ -13,15 +13,22 @@ import * as moment from 'moment';
 export class ActivityService {
     constructor(private http: HttpClient, private endpoint: string) {}
 
-    getActivitiesByProgramId(programId: number): Observable<Activity[]> {
+    getActivitiesByProgramId(
+        paramsConfig: any,
+        paramValues: { programId: number }
+    ): Observable<Activity[]> {
         let params = new HttpParams();
-        params = params.append('workflowlevel1__id', programId.toString());
+
+        Object.getOwnPropertyNames(paramsConfig).forEach(param => {
+            const value = paramValues[paramsConfig[param].toString()];
+            params = params.append(param, value);
+        });
 
         return this.http.get<Activity[]>(this.endpoint, { params }).pipe(
             map(activities =>
                 activities.map(a => ({
                     id: a.id,
-                    programId,
+                    programId: paramValues.programId,
                     name: a.name,
                     expected_start_date: moment(a.expected_start_date).format(
                         DEFAULT_DATE_FORMAT
@@ -36,9 +43,21 @@ export class ActivityService {
         );
     }
 
+    createActivity(activity: Activity): Observable<Activity> {
+        return this.http
+            .post<Activity>(this.endpoint, activity)
+            .pipe(catchError((error: any) => throwError(error.json())));
+    }
+
     updateActivity(activity: Activity): Observable<Activity> {
         return this.http
-            .put<Activity>(`${this.endpoint}/${activity.id}/`, activity)
+            .put<Activity>(`${this.endpoint}${activity.id}/`, activity)
+            .pipe(catchError((error: any) => throwError(error.json())));
+    }
+
+    deleteActivity(activityId: number): Observable<any> {
+        return this.http
+            .delete<any>(`${this.endpoint}${activityId}/`)
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 }

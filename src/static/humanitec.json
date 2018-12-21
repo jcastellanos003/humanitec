@@ -6,10 +6,13 @@
         },
         "features": {
             "dashboard": {
-                "programs": "workflowlevel1"
+                "programs": "workflowlevel1/"
             },
             "activities": {
-                "activity": "workflowlevel2"
+                "activity": "workflowlevel2/",
+                "params": {
+                    "workflowlevel1__id": "programId"
+                }
             }
         }
     },
@@ -19,6 +22,9 @@
                 "tableConfig": {
                     "id": {
                         "label": "Id"
+                    },
+                    "name": {
+                        "label": "Name"
                     },
                     "expected_start_date": {
                         "label": "Start Date"

@@ -15,6 +15,6 @@ export class ProgramTileFooterComponent {
     }
 
     get date(): Date {
-        return new Date(this.program.createDate);
+        return new Date(this.program.create_date);
     }
 }
