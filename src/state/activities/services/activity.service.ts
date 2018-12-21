@@ -51,7 +51,13 @@ export class ActivityService {
 
     updateActivity(activity: Activity): Observable<Activity> {
         return this.http
-            .put<Activity>(`${this.endpoint}/${activity.id}/`, activity)
+            .put<Activity>(`${this.endpoint}${activity.id}/`, activity)
+            .pipe(catchError((error: any) => throwError(error.json())));
+    }
+
+    deleteActivity(activityId: number): Observable<any> {
+        return this.http
+            .delete<any>(`${this.endpoint}${activityId}/`)
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 }

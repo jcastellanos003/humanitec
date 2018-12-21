@@ -8,14 +8,20 @@ import { ApiConfig } from '@humanitec/core';
 
 import {
     LOAD_ACTIVITIES,
+    UPDATE_ACTIVITY,
+    UPDATE_ACTIVITY_SUCCESS,
+    CREATE_ACTIVITY,
+    DELETE_ACTIVITY,
     LoadActivitiesSuccess,
     LoadActivitiesFail,
     LoadActivities,
-    UPDATE_ACTIVITY,
     UpdateActivity,
     UpdateActivitySuccess,
     UpdateActivityFail,
-    UPDATE_ACTIVITY_SUCCESS
+    CreateActivity,
+    DeleteActivity,
+    DeleteActivitySuccess,
+    DELETE_ACTIVITY_SUCCESS
 } from '../actions/activities.action';
 import { ActivityService } from '../../services/activity.service';
 
@@ -47,6 +53,28 @@ export class ActivitiesEffects {
     );
 
     @Effect()
+    createActivity$ = this.actions$.ofType(CREATE_ACTIVITY).pipe(
+        map((action: CreateActivity) => action.payload),
+        switchMap(activityResponse => {
+            return this.activityService.createActivity(activityResponse).pipe(
+                map(activity => new UpdateActivitySuccess(activity)),
+                catchError(error => of(new UpdateActivityFail(error)))
+            );
+        })
+    );
+
+    @Effect()
+    deleteActivity$ = this.actions$.ofType(DELETE_ACTIVITY).pipe(
+        map((action: DeleteActivity) => action.payload),
+        switchMap(activityId => {
+            return this.activityService.deleteActivity(activityId).pipe(
+                map(() => new DeleteActivitySuccess(activityId)),
+                catchError(error => of(new UpdateActivityFail(error)))
+            );
+        })
+    );
+
+    @Effect()
     updateActivity$ = this.actions$.ofType(UPDATE_ACTIVITY).pipe(
         map((action: UpdateActivity) => action.payload),
         switchMap(activityResponse => {
@@ -59,6 +87,12 @@ export class ActivitiesEffects {
 
     @Effect()
     updateActivitySuccess$ = this.actions$.ofType(UPDATE_ACTIVITY_SUCCESS).pipe(
+        map(() => new Back()),
+        catchError(error => of(new UpdateActivityFail(error)))
+    );
+
+    @Effect()
+    deleteActivitySuccess$ = this.actions$.ofType(DELETE_ACTIVITY_SUCCESS).pipe(
         map(() => new Back()),
         catchError(error => of(new UpdateActivityFail(error)))
     );

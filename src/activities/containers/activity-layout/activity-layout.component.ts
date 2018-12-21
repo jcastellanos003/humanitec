@@ -6,7 +6,9 @@ import {
     ActivitiesState,
     getSelectedActivity,
     UpdateActivity,
-    getProgramUrl
+    getProgramUrl,
+    CreateActivity,
+    DeleteActivity
 } from '@humanitec/state/activities';
 import { Activity } from '@humanitec/core';
 
@@ -32,7 +34,7 @@ export class ActivityLayoutComponent implements OnInit {
 
     onCreateActivity(activity: Activity) {
         this.toggleLoader();
-        console.log('creating activity', activity);
+        this.store.dispatch(new CreateActivity(activity));
     }
 
     onUpdateActivity(activity: Activity) {
@@ -40,9 +42,9 @@ export class ActivityLayoutComponent implements OnInit {
         this.store.dispatch(new UpdateActivity(activity));
     }
 
-    onDeleteActivity(activity: Activity) {
+    onDeleteActivity(activityId: number) {
         this.toggleLoader();
-        console.log('deleting activity', activity);
+        this.store.dispatch(new DeleteActivity(activityId));
     }
 
     toggleLoader(): void {

@@ -6,10 +6,10 @@
         },
         "features": {
             "dashboard": {
-                "programs": "workflowlevel1"
+                "programs": "workflowlevel1/"
             },
             "activities": {
-                "activity": "workflowlevel2",
+                "activity": "workflowlevel2/",
                 "params": {
                     "workflowlevel1__id": "programId"
                 }

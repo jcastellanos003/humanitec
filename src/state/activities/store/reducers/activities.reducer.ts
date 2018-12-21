@@ -7,7 +7,8 @@ import {
     LOAD_ACTIVITIES_FAIL,
     LOAD_ACTIVITIES_SUCCESS,
     UPDATE_ACTIVITY_FAIL,
-    UPDATE_ACTIVITY_SUCCESS
+    UPDATE_ACTIVITY_SUCCESS,
+    DELETE_ACTIVITY_SUCCESS
 } from '../actions/activities.action';
 
 export interface ActivityState {
@@ -57,6 +58,17 @@ export function activityReducer(
                 ...state.entities,
                 [activity.id]: activity
             };
+
+            return {
+                ...state,
+                entities
+            };
+        }
+
+        case DELETE_ACTIVITY_SUCCESS: {
+            const activityId: number = action.payload;
+
+            const { [activityId]: removed, ...entities } = state.entities;
 
             return {
                 ...state,

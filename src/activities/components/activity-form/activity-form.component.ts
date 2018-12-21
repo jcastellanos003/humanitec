@@ -70,9 +70,11 @@ export class ActivityFormComponent implements OnInit {
         const { value, valid } = form;
 
         if (valid) {
-            this.create.emit({
+            this.create.emit(<any>{
+                name: value.name,
                 workflowlevel1: this.programUrl,
-                ...value
+                expected_start_date: value.startDate || null,
+                expected_end_date: value.endDate || null
             });
         }
     }
@@ -83,10 +85,12 @@ export class ActivityFormComponent implements OnInit {
         if (valid && touched) {
             const { id, workflowlevel1 } = this.activity;
 
-            this.update.emit({
+            this.update.emit(<any>{
                 id,
                 workflowlevel1,
-                ...value
+                name: value.name,
+                expected_start_date: value.startDate || null,
+                expected_end_date: value.endDate || null
             });
         }
     }
