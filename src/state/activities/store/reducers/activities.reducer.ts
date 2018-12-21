@@ -5,7 +5,9 @@ import {
     ActivitiesAction,
     LOAD_ACTIVITIES,
     LOAD_ACTIVITIES_FAIL,
-    LOAD_ACTIVITIES_SUCCESS
+    LOAD_ACTIVITIES_SUCCESS,
+    UPDATE_ACTIVITY_FAIL,
+    UPDATE_ACTIVITY_SUCCESS
 } from '../actions/activities.action';
 
 export interface ActivityState {
@@ -48,6 +50,21 @@ export function activityReducer(
             };
         }
 
+        case UPDATE_ACTIVITY_SUCCESS: {
+            const activity = action.payload;
+
+            const entities = {
+                ...state.entities,
+                [activity.id]: activity
+            };
+
+            return {
+                ...state,
+                entities
+            };
+        }
+
+        case UPDATE_ACTIVITY_FAIL:
         case LOAD_ACTIVITIES_FAIL:
             return {
                 ...state,

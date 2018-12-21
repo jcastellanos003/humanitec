@@ -23,15 +23,22 @@ export class ActivityService {
                     id: a.id,
                     programId,
                     name: a.name,
-                    startDate: moment(a['expected_start_date']).format(
+                    expected_start_date: moment(a.expected_start_date).format(
                         DEFAULT_DATE_FORMAT
                     ),
-                    endDate: moment(a['expected_end_date']).format(
+                    expected_end_date: moment(a.expected_end_date).format(
                         DEFAULT_DATE_FORMAT
-                    )
+                    ),
+                    workflowlevel1: a.workflowlevel1
                 }))
             ),
             catchError((error: any) => throwError(error.json()))
         );
+    }
+
+    updateActivity(activity: Activity): Observable<Activity> {
+        return this.http
+            .put<Activity>(`${this.endpoint}/${activity.id}/`, activity)
+            .pipe(catchError((error: any) => throwError(error.json())));
     }
 }

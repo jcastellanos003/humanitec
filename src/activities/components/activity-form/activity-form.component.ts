@@ -55,11 +55,11 @@ export class ActivityFormComponent implements OnInit {
             this.activityForm.controls['name'].setValue(this.activity.name);
 
             this.activityForm.controls['startDate'].setValue(
-                moment(this.activity.startDate, DEFAULT_DATE_FORMAT)
+                moment(this.activity.expected_start_date, DEFAULT_DATE_FORMAT)
             );
 
             this.activityForm.controls['endDate'].setValue(
-                moment(this.activity.endDate, DEFAULT_DATE_FORMAT)
+                moment(this.activity.expected_end_date, DEFAULT_DATE_FORMAT)
             );
         }
     }
@@ -68,7 +68,7 @@ export class ActivityFormComponent implements OnInit {
         const { value, valid } = form;
 
         if (valid) {
-            this.create.emit({ ...value });
+            this.create.emit(this.getEntityToPost(value));
         }
     }
 
@@ -76,14 +76,14 @@ export class ActivityFormComponent implements OnInit {
         const { value, valid, touched } = form;
 
         if (valid && touched) {
-            this.update.emit({ ...value });
+            this.update.emit(this.getEntityToPost(value));
         }
     }
 
     deleteActivity(form: FormGroup) {
         const { value } = form;
 
-        this.delete.emit({ ...value });
+        this.delete.emit(this.getEntityToPost(value));
     }
 
     fieldErrored(field: string): boolean {
@@ -91,5 +91,15 @@ export class ActivityFormComponent implements OnInit {
             !this.activityForm.get(field).valid &&
             this.activityForm.get(field).touched
         );
+    }
+
+    private getEntityToPost(formValue: any): Activity {
+        const { id, workflowlevel1 } = this.activity;
+
+        return {
+            id,
+            workflowlevel1,
+            ...formValue
+        };
     }
 }

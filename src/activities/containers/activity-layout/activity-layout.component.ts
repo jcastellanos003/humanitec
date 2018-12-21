@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 
 import {
     ActivitiesState,
-    getSelectedActivity
+    getSelectedActivity,
+    UpdateActivity
 } from '@humanitec/state/activities';
 import { Activity } from '@humanitec/core';
 
@@ -18,6 +19,8 @@ import { Observable } from 'rxjs';
 export class ActivityLayoutComponent implements OnInit {
     activity$: Observable<Activity>;
 
+    showLoader = false;
+
     constructor(private store: Store<ActivitiesState>) {}
 
     ngOnInit() {
@@ -25,14 +28,21 @@ export class ActivityLayoutComponent implements OnInit {
     }
 
     onCreateActivity(activity: Activity) {
-        console.log('creating activity');
+        this.toggleLoader();
+        console.log('creating activity', activity);
     }
 
     onUpdateActivity(activity: Activity) {
-        console.log('updating activity');
+        this.toggleLoader();
+        this.store.dispatch(new UpdateActivity(activity));
     }
 
     onDeleteActivity(activity: Activity) {
-        console.log('deleting activity');
+        this.toggleLoader();
+        console.log('deleting activity', activity);
+    }
+
+    toggleLoader(): void {
+        this.showLoader = !this.showLoader;
     }
 }
