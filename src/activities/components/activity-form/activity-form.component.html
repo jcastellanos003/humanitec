@@ -1,7 +1,4 @@
-<form
-    [formGroup]="activityForm"
-    (ngSubmit)="onSubmit()"
->
+<form [formGroup]="activityForm">
     <div class="form-content">
 
         <mat-form-field floatLabel="always">
@@ -25,6 +22,7 @@
 
             <input
                 matInput
+                tabindex="2"
                 [matDatepicker]="sd"
                 placeholder="dd/mm/yyyy"
                 formControlName="startDate"
@@ -43,10 +41,11 @@
         </mat-form-field>
 
         <mat-form-field floatLabel="always">
-            <mat-label>Start date</mat-label>
+            <mat-label>End date</mat-label>
 
             <input
                 matInput
+                tabindex="3"
                 [matDatepicker]="ed"
                 placeholder="dd/mm/yyyy"
                 formControlName="endDate"
