@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import {
     ActivitiesState,
     getSelectedActivity,
-    UpdateActivity
+    UpdateActivity,
+    getProgramUrl
 } from '@humanitec/state/activities';
 import { Activity } from '@humanitec/core';
 
@@ -18,6 +19,7 @@ import { Observable } from 'rxjs';
 })
 export class ActivityLayoutComponent implements OnInit {
     activity$: Observable<Activity>;
+    programUrl$: Observable<string>;
 
     showLoader = false;
 
@@ -25,6 +27,7 @@ export class ActivityLayoutComponent implements OnInit {
 
     ngOnInit() {
         this.activity$ = this.store.select(getSelectedActivity);
+        this.programUrl$ = this.store.select(getProgramUrl);
     }
 
     onCreateActivity(activity: Activity) {

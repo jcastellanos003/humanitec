@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
-import { Go } from '@humanitec/state/router';
+import { Back } from '@humanitec/state/router';
+import { ApiConfigInjectionToken } from '@humanitec/shared/tokens';
+import { ApiConfig } from '@humanitec/core';
 
 import {
     LOAD_ACTIVITIES,
@@ -24,7 +26,8 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 export class ActivitiesEffects {
     constructor(
         private actions$: Actions,
-        private activityService: ActivityService
+        private activityService: ActivityService,
+        @Inject(ApiConfigInjectionToken) private apiConfig: ApiConfig
     ) {}
 
     @Effect()
@@ -32,7 +35,10 @@ export class ActivitiesEffects {
         map((action: LoadActivities) => action.payload),
         switchMap((programId: number) => {
             return this.activityService
-                .getActivitiesByProgramId(programId)
+                .getActivitiesByProgramId(
+                    this.apiConfig.features.activities.params,
+                    { programId }
+                )
                 .pipe(
                     map(activities => new LoadActivitiesSuccess(activities)),
                     catchError(error => of(new LoadActivitiesFail(error)))
@@ -53,7 +59,7 @@ export class ActivitiesEffects {
 
     @Effect()
     updateActivitySuccess$ = this.actions$.ofType(UPDATE_ACTIVITY_SUCCESS).pipe(
-        map(() => new Go({ path: ['/'] })),
+        map(() => new Back()),
         catchError(error => of(new UpdateActivityFail(error)))
     );
 }

@@ -17,8 +17,9 @@ export class ProgramsService {
                     id: p.id,
                     name: p.name,
                     budget: p.budget,
-                    createDate: p['create_date'],
-                    status: p.status
+                    create_date: p.create_date,
+                    status: p.status,
+                    url: p.url
                 }))
             ),
             catchError((error: any) => throwError(error.json()))

@@ -23,6 +23,7 @@
             <input
                 matInput
                 tabindex="2"
+                [max]="endDate"
                 [matDatepicker]="sd"
                 placeholder="dd/mm/yyyy"
                 formControlName="startDate"
@@ -46,6 +47,7 @@
             <input
                 matInput
                 tabindex="3"
+                [min]="startDate"
                 [matDatepicker]="ed"
                 placeholder="dd/mm/yyyy"
                 formControlName="endDate"
@@ -89,7 +91,7 @@
                 class="submit"
                 color="warn"
                 mat-stroked-button
-                (click)="deleteActivity(activityForm)"
+                (click)="deleteActivity()"
             >
                 Delete
             </button>

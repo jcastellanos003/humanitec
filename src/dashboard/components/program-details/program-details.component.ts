@@ -17,7 +17,7 @@ export class ProgramDetailsComponent {
     @Output()
     activitySelected = new EventEmitter<Activity>();
     @Output()
-    createActivity = new EventEmitter<any>();
+    createActivity = new EventEmitter<Program>();
 
     get programTitle(): string {
         return this.program.name;
@@ -32,6 +32,6 @@ export class ProgramDetailsComponent {
     }
 
     onCreateActivity() {
-        this.createActivity.emit();
+        this.createActivity.emit(this.program);
     }
 }

@@ -21,7 +21,12 @@ import { activitiesGuards, ActivityExistsGuard } from './guards';
 export const ROUTES: Routes = [
     {
         path: 'new',
-        component: ActivityLayoutComponent
+        children: [
+            {
+                path: ':programUrl',
+                component: ActivityLayoutComponent
+            }
+        ]
     },
     {
         path: ':activityId',
