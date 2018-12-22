@@ -32,6 +32,9 @@
                     "expected_end_date": {
                         "label": "End Date"
                     },
+                    "asignee": {
+                        "label": "Asignee"
+                    },
                     "edit": {
                         "label": "edit",
                         "action": "edit"

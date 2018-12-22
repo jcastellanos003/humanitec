@@ -4,8 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { ApiConfig } from '@humanitec/core';
-import { ApiConfigInjectionToken } from '@humanitec/shared/tokens';
+import { ApiConfig, AppConfig } from '@humanitec/core';
+import {
+    ApiConfigInjectionToken,
+    AppConfigInjectionToken
+} from '@humanitec/shared/tokens';
 
 import { reducers, effects, FEATURE_ACTIVITIES_NAME } from './store';
 
@@ -20,7 +23,7 @@ import { ActivityService } from './services/activity.service';
         {
             provide: ActivityService,
             useFactory: activitiesServiceFactory,
-            deps: [HttpClient, ApiConfigInjectionToken]
+            deps: [HttpClient, AppConfigInjectionToken, ApiConfigInjectionToken]
         }
     ]
 })
@@ -28,10 +31,12 @@ export class HumanitecActivitiesStateModule {}
 
 export function activitiesServiceFactory(
     httpClient: HttpClient,
+    appConfig: AppConfig,
     apiConfig: ApiConfig
 ): ActivityService {
     return new ActivityService(
         httpClient,
+        appConfig.localStorageKey,
         apiConfig.features.activities.activity
     );
 }

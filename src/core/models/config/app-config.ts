@@ -1,4 +1,4 @@
 export interface AppConfig {
-    assetsPath: string;
+    localStorageKey: string;
     appConfigUrl: string;
 }

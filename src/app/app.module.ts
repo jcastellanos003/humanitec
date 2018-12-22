@@ -41,7 +41,7 @@ export const ROUTES: Routes = [
 
 export const APP_CONFIG: AppConfig = {
     appConfigUrl: environment.APP_CONFIG_URL,
-    assetsPath: environment.ASSETS_PATH
+    localStorageKey: environment.LOCAL_STORAGE_KEY
 };
 
 @NgModule({
