@@ -1,5 +1,5 @@
 defaults: &defaults
-    working_directory: ~/cosmeticapp
+    working_directory: ~/humanitec
     docker:
         - image: circleci/node:10-browsers
 
