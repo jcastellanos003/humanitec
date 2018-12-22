@@ -43,7 +43,8 @@ export class ActivityFormComponent implements OnInit {
     activityForm: FormGroup = this.fb.group({
         name: ['', [Validators.required]],
         startDate: [''],
-        endDate: ['']
+        endDate: [''],
+        asignee: ['']
     });
 
     get isEdition(): boolean {
@@ -74,7 +75,8 @@ export class ActivityFormComponent implements OnInit {
                 name: value.name,
                 workflowlevel1: this.programUrl,
                 expected_start_date: value.startDate || null,
-                expected_end_date: value.endDate || null
+                expected_end_date: value.endDate || null,
+                asignee: value.asignee
             });
         }
     }
@@ -90,7 +92,8 @@ export class ActivityFormComponent implements OnInit {
                 workflowlevel1,
                 name: value.name,
                 expected_start_date: value.startDate || null,
-                expected_end_date: value.endDate || null
+                expected_end_date: value.endDate || null,
+                asignee: value.asignee
             });
         }
     }
@@ -108,6 +111,8 @@ export class ActivityFormComponent implements OnInit {
 
     private patchForm(): void {
         this.activityForm.controls['name'].setValue(this.activity.name);
+
+        this.activityForm.controls['asignee'].setValue(this.activity.asignee);
 
         this.activityForm.controls['startDate'].setValue(
             moment(this.activity.expected_start_date, DEFAULT_DATE_FORMAT)

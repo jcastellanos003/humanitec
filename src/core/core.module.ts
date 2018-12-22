@@ -3,11 +3,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import {
     ApiConfigInjectionToken,
-    AppModulesConfigInjectionToken
+    AppModulesConfigInjectionToken,
+    AppConfigInjectionToken
 } from '@humanitec/shared/tokens';
 
 import { AppConfig, ApiConfig, AppModulesConfig } from './models';
-import { AppConfigInjectionToken } from './tokens/app-config.injection-token';
 import { CustomHttpInterceptor } from './interceptors/http/http.interceptor';
 import { StaticConfigService } from './services/static.service';
 

@@ -65,6 +65,18 @@
 
         </mat-form-field>
 
+        <mat-form-field floatLabel="always">
+            <mat-label>Asignee</mat-label>
+
+            <input
+                type="text"
+                formControlName="asignee"
+                tabindex="4"
+                matInput
+            />
+
+        </mat-form-field>
+
         <button
             *ngIf="!isEdition"
             type="button"

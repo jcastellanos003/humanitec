@@ -2,13 +2,10 @@
 
 Frontend test assignment.
 <br/><br/>
-First of all, thanks for taking your time and review my test, this is not the complete version though, because of the time.
+First of all, thanks for taking your time to review my test, and let me be part of the process.
 <br/><br/>
 The missing steps are:
 
--   Create Activity
--   Delete Activity
--   Add asignee
 -   Tests
 
 ## Using this project
@@ -67,7 +64,7 @@ I worked using git flow.
 
 ## Facts:
 
-I would need more time to complete the 100% of the test if possible
+This test have a few tricky things to solve so is very fun to do it.
 <br/><br/>
 
 ## Third party libraries
